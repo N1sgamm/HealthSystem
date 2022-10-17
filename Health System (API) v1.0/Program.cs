@@ -26,21 +26,35 @@ namespace Health_System__API__v1._0
         }
         static int ShowHUD()
         {
+            Console.WriteLine("-----------------------------");
+            Console.WriteLine("Current Shield Points: " + shield);
+            Console.WriteLine("-----------------------------");
+            Console.WriteLine("Current Health Points: " + health);
+            Console.WriteLine("-----------------------------");
+            Console.WriteLine("Current Number of Lives: " + lives);
+            Console.WriteLine("-----------------------------");
 
         }
-        static int TakeDamage(int arm, int hp, int dmg, int stocks)
+        static int TakeDamage(int arm, int hp, int dmg, int stocks) // arm is shield, hp is health, stocks is lives
         {
-            if (arm > 0)
+            if (arm > dmg)
             {
-                arm = arm - dmg; //maybe broke, remember arm then hp
-            }
-            if (hp > 0)
-            {
-                hp = hp - dmg;
+                arm = arm - dmg;
             }
             else
             {
+                dmg = dmg - arm;
+                arm = arm - arm;
+                hp = hp - dmg;
+                if (hp <= 0)
+                {
+                    stocks = stocks - 1;
+                    if (stocks <= 0)
+                    {
+                        GameOver; // Implement Game Over
+                    }
 
+                }
             }
         }
     }
