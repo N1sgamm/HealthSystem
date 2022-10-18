@@ -8,23 +8,58 @@ namespace Health_System__API__v1._0
 {
     internal class Program
     {
+        //initialization
+        static int health;
+        static string healthStatus;
+        static int shield;
+        static int lives;
+        static int monsters;
         static void Main(string[] args)
         {
-            //initialization
-            int health;
-            int shield;
-            int lives;
-            int damage;
-            int currentMonsters;
             health = 100;
+            healthStatus = "You are at full health.";
             shield = 100;
             lives = 3;
-            damage = currentMonsters * 10;
+            monsters = 3;
 
-            //
-            TakeDamage(shield, health, damage, lives);
+            Console.WriteLine("Health System");
+            Console.WriteLine("by Zackery Goodwin");
+            Console.WriteLine("-----------------------");
+            Console.WriteLine();
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey(true);
+            Console.Clear();
+
+            ShowHUD();
+            Console.WriteLine("Press any button to kill a monster");
+            Console.ReadKey(true);
+            Console.Clear();
+
+            TakeDamage(monsters * 10);
+            ShowHUD();
+            Console.ReadKey(true);
+            Console.Clear();
+
+            TakeDamage(monsters * 10);
+            ShowHUD();
+            Console.ReadKey(true);
+            Console.Clear();
+
+            TakeDamage(monsters * 10);
+            ShowHUD();
+            Console.ReadKey(true);
+            Console.Clear();
+
+            TakeDamage(monsters * 10);
+            ShowHUD();
+            Console.ReadKey(true);
+            Console.Clear();
         }
-        static int ShowHUD()
+        static void Heal(int hp)
+        {
+
+        }
+        static void ShowHUD()
         {
             Console.WriteLine("-----------------------------");
             Console.WriteLine("Current Shield Points: " + shield);
@@ -33,29 +68,53 @@ namespace Health_System__API__v1._0
             Console.WriteLine("-----------------------------");
             Console.WriteLine("Current Number of Lives: " + lives);
             Console.WriteLine("-----------------------------");
+            Console.WriteLine("Current Number of Monsters: " + monsters);
+            Console.WriteLine("-----------------------------");
+            Console.WriteLine();
+        }
+        static void OneUp()
+        {
+            lives = lives - 1;
+            health = 100;
+            shield = 100;
+        }
+        static void GameOver()
+        {
 
         }
-        static int TakeDamage(int arm, int hp, int dmg, int stocks) // arm is shield, hp is health, stocks is lives
+        static void TakeDamage(int damage)
         {
-            if (arm > dmg)
+            if (damage < 0)
             {
-                arm = arm - dmg;
+                Console.WriteLine("Error: damage can not be less than 0");
+            }
+            else if (shield >= damage)
+            {
+                shield = shield - damage;
             }
             else
             {
-                dmg = dmg - arm;
-                arm = arm - arm;
-                hp = hp - dmg;
-                if (hp <= 0)
+                damage = damage - shield;
+                shield = shield - shield;
+                health = health - damage;
+                if (health <= 0)
                 {
-                    stocks = stocks - 1;
-                    if (stocks <= 0)
+                    OneUp();
+                    if (lives <= 0)
                     {
-                        GameOver; // Implement Game Over
+                        GameOver();
                     }
 
                 }
             }
+        }
+        static void ShowHealthStatus()
+        {
+            if (health == 100)
+            {
+                healthStatus = "You are at full health";
+            }
+
         }
     }
 }
