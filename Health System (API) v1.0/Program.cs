@@ -29,29 +29,24 @@ namespace Health_System__API__v1._0
             Console.WriteLine("Press any key to continue");
             Console.ReadKey(true);
             Console.Clear();
-
             ShowHUD();
             Console.WriteLine("Press any button to kill a monster");
             Console.ReadKey(true);
             Console.Clear();
 
             TakeDamage(monsters * 10);
-            ShowHUD();
             Console.ReadKey(true);
             Console.Clear();
 
             TakeDamage(monsters * 10);
-            ShowHUD();
             Console.ReadKey(true);
             Console.Clear();
 
             TakeDamage(monsters * 10);
-            ShowHUD();
             Console.ReadKey(true);
             Console.Clear();
 
             TakeDamage(monsters * 10);
-            ShowHUD();
             Console.ReadKey(true);
             Console.Clear();
         }
@@ -91,6 +86,7 @@ namespace Health_System__API__v1._0
             else if (shield >= damage)
             {
                 shield = shield - damage;
+                ShowHUD();
             }
             else
             {
@@ -105,6 +101,10 @@ namespace Health_System__API__v1._0
                         GameOver();
                     }
 
+                }
+                else
+                {
+                    ShowHUD();
                 }
             }
         }
